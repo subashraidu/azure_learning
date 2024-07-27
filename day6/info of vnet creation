@@ -1,0 +1,13 @@
+1. ifo from dev or business team is given to create a vnet for a particular project with a cidr range (no of ips that the projects considers to use)
+
+2. after getting the required cidr it is broken to different subnets for different purposes such as web sever, business logic, database.
+
+3. this entire subnet is protected by using a firewall(protection from milious users)
+
+4. And each subnet is protected using NSG (network security group)
+
+5. How the request flow should happen from a particular sunet to a particular application will be mentioned in the route trables and each route tables will have system routes.
+
+6. A additional subnet will also be created called app gateway where where L7 load balancer is present this to distribute the load
+
+7. if a user requests from a browesr, this request flows from user system to router where the rouer connects to ISP (internet service provider) this connects to DNS server gets the IP address and then the request is sent to particular IP address, this IP address if legit passess the firewall will we enter the particular cidr block, its then handled by the load balancer, as per the route policy it is sent to the web serer subnet here if the ip and port is allowed in NSG it will be allowd inside the subnet, as per the route tables and system routes the request is sent to the web application here it is handled and for business logic this request is sent to business logic sunet via L4 load balncer.
